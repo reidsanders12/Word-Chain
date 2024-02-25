@@ -133,15 +133,15 @@ const WordGame = () => {
   };
   
   
-  const restartGame = () => {
-    setScore(0);
-    setTimer(null); // Reset the timer to null
-    setCurrentWord("");
-    setGameOver(false);
-    setEnteredWords([]);
-    setInputWord(""); // Reset the input field
-    setShowStartingWord(false); // Hide the starting word when the game restarts
-  };
+//   const restartGame = () => {
+//     setScore(0);
+//     setTimer(null); // Reset the timer to null
+//     setCurrentWord("");
+//     setGameOver(false);
+//     setEnteredWords([]);
+//     setInputWord(""); // Reset the input field
+//     setShowStartingWord(false); // Hide the starting word when the game restarts
+//   };
 
   return (
     <div className="word-game-container">
