@@ -41,44 +41,44 @@ const WordGame = () => {
     }
   }, [timer, gameOver]);
 
-//   const generateStartingWord = () => {
-//     const storedDate = localStorage.getItem("lastGameDate");
-//     const currentDate = new Date().toLocaleDateString();
-
-//     if (storedDate === currentDate) {
-//       setMessageContent("You can only play once a day!"); // Set the message content
-//       setShowMessage(true); // Show the message modal
-//       return; // Exit the function early
-//     }
-
-//     const randomIndex = Math.floor(Math.random() * validWords.length);
-//     const randomWord = validWords[randomIndex];
-//     setCurrentWord(randomWord);
-//     localStorage.setItem("startingWord", randomWord);
-//     localStorage.setItem("startingWordDate", currentDate);
-//     localStorage.setItem("lastGameDate", currentDate);
-//     setShowStartingWord(true);
-//     setTimer(30);
-//   };
-
-const generateStartingWord = () => {
-    const storedDate = localStorage.getItem("startingWordDate");
+  const generateStartingWord = () => {
+    const storedDate = localStorage.getItem("lastGameDate");
     const currentDate = new Date().toLocaleDateString();
-    // Check if the stored date matches the current date
+
     if (storedDate === currentDate) {
-      const storedWord = localStorage.getItem("startingWord");
-      setCurrentWord(storedWord);
-    } else {
-      const randomIndex = Math.floor(Math.random() * validWords.length);
-      const randomWord = validWords[randomIndex];
-      setCurrentWord(randomWord);
-      localStorage.setItem("startingWord", randomWord);
-      localStorage.setItem("startingWordDate", currentDate);
+      setMessageContent("You can only play once a day!"); // Set the message content
+      setShowMessage(true); // Show the message modal
+      return; // Exit the function early
     }
 
-    setShowStartingWord(true); // Show the starting word when the button is clicked
-    setTimer(30); // Initialize the timer when the button is clicked
+    const randomIndex = Math.floor(Math.random() * validWords.length);
+    const randomWord = validWords[randomIndex];
+    setCurrentWord(randomWord);
+    localStorage.setItem("startingWord", randomWord);
+    localStorage.setItem("startingWordDate", currentDate);
+    localStorage.setItem("lastGameDate", currentDate);
+    setShowStartingWord(true);
+    setTimer(30);
   };
+
+// const generateStartingWord = () => {
+//     const storedDate = localStorage.getItem("startingWordDate");
+//     const currentDate = new Date().toLocaleDateString();
+//     // Check if the stored date matches the current date
+//     if (storedDate === currentDate) {
+//       const storedWord = localStorage.getItem("startingWord");
+//       setCurrentWord(storedWord);
+//     } else {
+//       const randomIndex = Math.floor(Math.random() * validWords.length);
+//       const randomWord = validWords[randomIndex];
+//       setCurrentWord(randomWord);
+//       localStorage.setItem("startingWord", randomWord);
+//       localStorage.setItem("startingWordDate", currentDate);
+//     }
+
+//     setShowStartingWord(true); // Show the starting word when the button is clicked
+//     setTimer(30); // Initialize the timer when the button is clicked
+//   };
 
 
   const handleSubmit = (e) => {
@@ -183,9 +183,9 @@ const generateStartingWord = () => {
       ) : (
         <div className="game-over">
           <h2>Game Over!</h2>
-          <button className="restart-button" onClick={restartGame}>
+          {/* <button className="restart-button" onClick={restartGame}>
             Restart Game
-          </button>
+          </button> */}
         </div>
       )}
       {gameOver && (
