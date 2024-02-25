@@ -1,0 +1,19 @@
+.copy-button {
+    background-color: black;
+    color: white; /* White text */
+    border: none; /* No border */
+    height:30px;
+    border-radius: 100px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    }
+    
+    
+    .copy-button:hover{
+    background-color: gray;
+    color: white; /* White text */
+    border: none; /* No border */
+    height:30px;
+    border-radius: 100px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    }
+    

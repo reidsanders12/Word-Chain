@@ -1,0 +1,90 @@
+.word-game-container {
+  max-width: 1000px;
+  height: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.game-title {
+  color: #333;
+}
+
+.game-info {
+  margin-bottom: 20px;
+}
+
+.info {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.word{
+    font-size:30px;
+    margin: 5px 0;
+}
+
+.word-input {
+  background: #ffffff;
+  height: 70px;
+  width: 300px; /* Adjust width as needed */
+  border: 2px solid black; /* Border should be solid, not string */
+  padding: 0 10px; /* Add padding to input */
+  margin-right: 10px; /* Add some spacing between input and button */
+}
+
+.submit-button {
+  padding: 8px 20px;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.get-word-button {
+  padding: 8px 20px;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.game-over {
+  margin-top: 20px;
+}
+
+.restart-button {
+  padding: 8px 20px;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.past-word {
+  color: blue;
+}
+
+.input-container {
+  margin-bottom: 10px; /* Add margin bottom to create space between input and button */
+}
+
+.button-container {
+  margin-top: 10px; /* Add margin top to create space between input and button */
+}
+
+.word strong {
+    font-weight: bold;
+    color: blue;
+  }
+  
