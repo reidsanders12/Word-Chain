@@ -88,3 +88,33 @@
     color: blue;
   }
   
+  .start-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+  }
+  
+  .start-message .message-content {
+    text-align: center;
+  }
+  
+  .start-message button.close-button {
+    margin-top: 20px;
+    padding: 8px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .start-message button.close-button:hover {
+    background-color: #0056b3;
+  }
+  
