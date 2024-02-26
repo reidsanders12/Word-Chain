@@ -24,7 +24,7 @@ const TextDisplay = ({ enteredWords, validWords }) => {
         }
   
         // Update counts based on the presence of green and blue letters in the word
-        (greenCount * 2) += wordGreenCount; // Special letters: 2 points per letter
+        greenCount += wordGreenCount; // Special letters: 2 points per letter
         blueCount += wordBlueCount; // Normal letters: 1 point per letter
       } else {
         // Deduct points for invalid words
@@ -37,7 +37,7 @@ const TextDisplay = ({ enteredWords, validWords }) => {
   
 
   const { greenCount, blueCount, redCount } = countEmojis();
-  const score = greenCount + blueCount + redCount;
+  const score = (greenCount *2) + blueCount + redCount;
 
   const copyToClipboard = () => {
     const currentDate = new Date().toLocaleDateString(); // Get current date
