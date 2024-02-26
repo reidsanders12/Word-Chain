@@ -17,7 +17,7 @@ const TextDisplay = ({ enteredWords, validWords }) => {
         for (let i = 0; i < word.length; i++) {
           const letter = word[i];
           if (["w", "x", "v", "z"].includes(letter)) {
-            wordGreenCount++; // Increment the count of green letters
+            wordGreenCount+=2; // Increment the count of green letters
           } else {
             wordBlueCount++; // Increment the count of blue letters
           }
