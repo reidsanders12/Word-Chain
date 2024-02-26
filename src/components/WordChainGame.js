@@ -46,6 +46,25 @@ const WordGame = () => {
     }
   }, [timer, gameOver]);
 
+  // const generateStartingWord = () => {
+  //   const storedDate = localStorage.getItem("startingWordDate");
+  //   const currentDate = new Date().toLocaleDateString();
+  //   // Check if the stored date matches the current date
+  //   if (storedDate === currentDate) {
+  //     const storedWord = localStorage.getItem("startingWord");
+  //     setCurrentWord(storedWord);
+  //   } else {
+  //     const randomIndex = Math.floor(Math.random() * validWords.length);
+  //     const randomWord = validWords[randomIndex];
+  //     setCurrentWord(randomWord);
+  //     localStorage.setItem("startingWord", randomWord);
+  //     localStorage.setItem("startingWordDate", currentDate);
+  //   }
+
+  //   setShowStartingWord(true); // Show the starting word when the button is clicked
+  //   setTimer(30); // Initialize the timer when the button is clicked
+  // };
+
   const generateStartingWord = () => {
     const storedDate = localStorage.getItem("lastGameDate");
     const currentDate = new Date().toLocaleDateString();
@@ -66,140 +85,66 @@ const WordGame = () => {
     setTimer(30);
   };
 
-  // const generateStartingWord = () => {
-  //     const storedDate = localStorage.getItem("startingWordDate");
-  //     const currentDate = new Date().toLocaleDateString();
-  //     // Check if the stored date matches the current date
-  //     if (storedDate === currentDate) {
-  //       const storedWord = localStorage.getItem("startingWord");
-  //       setCurrentWord(storedWord);
-  //     } else {
-  //       const randomIndex = Math.floor(Math.random() * validWords.length);
-  //       const randomWord = validWords[randomIndex];
-  //       setCurrentWord(randomWord);
-  //       localStorage.setItem("startingWord", randomWord);
-  //       localStorage.setItem("startingWordDate", currentDate);
-  //     }
-
-  //     setShowStartingWord(true); // Show the starting word when the button is clicked
-  //     setTimer(30); // Initialize the timer when the button is clicked
-  //   };
-
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
-  //     const lowerCaseInput = inputWord.trim().toLowerCase();
-
-  //     // Add the entered word to the entered words list
-  //     setEnteredWords([...enteredWords, lowerCaseInput]);
-
-  //     if (enteredWords.includes(lowerCaseInput)) {
-  //       setMessageContent("You've already entered this word!"); // Set the message content
-  //       setShowMessage(true); // Show the message modal
-  //       setScore(score - 1); // Deduct one point from the score
-  //       return;
-  //     }
-
-  //     if (lowerCaseInput.length > 0) {
-  //       if (
-  //         currentWord === "" ||
-  //         lowerCaseInput[0] === currentWord[currentWord.length - 1]
-  //       ) {
-  //         let found = validWords.includes(lowerCaseInput);
-  //         if (!found) {
-  //           setMessageContent("The word is not in the word list!"); // Set the message content
-  //           setShowMessage(true); // Show the message modal
-  //           setScore(score - 1); // Deduct one point from the score
-  //         }
-  //         if (found) {
-  //           // Check if the word starts with the last letter of the previous word
-  //           if (currentWord !== "" && lowerCaseInput[0] !== currentWord[currentWord.length - 1]) {
-  //             setScore(score - 1); // Penalize the score by minus a point
-  //           }
-
-  //           setCurrentWord(lowerCaseInput);
-  //           setInputWord("");
-  //           let wordScore = 0;
-  //           for (let letter of lowerCaseInput) {
-  //             if (["w", "x", "v", "z"].includes(letter)) {
-  //               wordScore += 2;
-  //             } else {
-  //               wordScore += 1;
-  //             }
-  //           }
-  //           setScore(score + wordScore);
-  //         }
-  //       } else {
-  //         setMessageContent("The word must begin with the last letter of the previous word!"); // Set the message content
-  //         setShowMessage(true); // Show the message modal
-  //         setScore(score - 1); // Deduct one point from the score
-  //       }
-  //     }
-  //   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const lowerCaseInput = inputWord.trim().toLowerCase();
-
-    // Check if the input word is empty
-    if (lowerCaseInput.length === 0) {
-      return; // Do nothing if the input word is empty
+  
+    if (lowerCaseInput.length === 0 || enteredWords.includes(lowerCaseInput)) {
+      // Do nothing if the input word is empty or has already been entered
+      setInputWord(""); // Clear the input field
+      return;
     }
-
-    // Check if the current word is empty or if the input word matches the last letter of the current word
-    if (
-      currentWord === "" ||
-      lowerCaseInput[0] === currentWord[currentWord.length - 1]
-    ) {
-      // Check if the input word is in the valid words list
-      if (validWords.includes(lowerCaseInput)) {
-        // Update entered words
-        setEnteredWords([...enteredWords, lowerCaseInput]);
-
-        // Calculate word score based on letter counts
-        let wordScore = 0;
-        for (let letter of lowerCaseInput) {
-          if (["w", "x", "v", "z"].includes(letter)) {
-            wordScore += 2; // Special letters: 2 points per letter
-          } else {
-            wordScore += 1; // Normal letters: 1 point per letter
+  
+    // Add the entered word to the entered words list
+    setEnteredWords([...enteredWords, lowerCaseInput]);
+  
+    if (enteredWords.includes(lowerCaseInput)) {
+      setMessageContent("You've already entered this word!"); // Set the message content
+      setShowMessage(true); // Show the message modal
+      setScore(score - 1); // Deduct one point from the score
+      setInputWord(""); // Clear the input field
+      return;
+    }
+  
+    if (lowerCaseInput.length > 0) {
+      if (
+        currentWord === "" ||
+        lowerCaseInput[0] === currentWord[currentWord.length - 1]
+      ) {
+        // Check if the word is valid
+        let found = validWords.includes(lowerCaseInput);
+        if (!found) {
+          setMessageContent("The word is not in the word list!"); // Set the message content
+          setShowMessage(true); // Show the message modal
+          setScore(score - 1); // Deduct one point from the score
+        } else {
+          // Update the current word if the input is valid
+          setCurrentWord(lowerCaseInput);
+  
+          // Calculate score based on letters
+          let wordScore = 0;
+          for (let letter of lowerCaseInput) {
+            if (["w", "x", "v", "z"].includes(letter)) {
+              wordScore += 2; // Special letters: 2 points
+            } else {
+              wordScore += 1; // Normal letters: 1 point
+            }
           }
+          setScore(score + wordScore);
         }
-
-        // Update the score
-        setScore(score + wordScore);
-
-        // Update the current word
-        setCurrentWord(lowerCaseInput);
-
-        // Clear the input field
-        setInputWord("");
-
-        // Reset the message modal
-        setMessageContent("");
-        setShowMessage(false);
       } else {
-        // If the input word is not in the valid words list, show an error message
-        setMessageContent("The word is not in the word list!");
-        setShowMessage(true);
+        setMessageContent("The word must begin with the last letter of the previous word!"); // Set the message content
+        setShowMessage(true); // Show the message modal
+        setScore(score - 1); // Deduct one point from the score
       }
-    } else {
-      // If the input word doesn't match the last letter of the current word, show an error message
-      setMessageContent(
-        "The word must begin with the last letter of the previous word!"
-      );
-      setShowMessage(true);
     }
+  
+    // Clear the input field after submitting
+    setInputWord("");
   };
-
-  //   const restartGame = () => {
-  //     setScore(0);
-  //     setTimer(null); // Reset the timer to null
-  //     setCurrentWord("");
-  //     setGameOver(false);
-  //     setEnteredWords([]);
-  //     setInputWord(""); // Reset the input field
-  //     setShowStartingWord(false); // Hide the starting word when the game restarts
-  //   };
+  
+  
+  
 
   return (
     <div>
@@ -212,10 +157,12 @@ const WordGame = () => {
               word starts with the last letter of the previous word.
               <br />
               You earn points based on the letters in the words:
-              <ul>
-                <li>Normal letters: 1 point</li>
-                <li>Special letters (z, w, x, v): 2 points</li>
-              </ul>
+            </p>
+            <ul>
+              <li>Normal letters: 1 point</li>
+              <li>Special letters (z, w, x, v): 2 points</li>
+            </ul>
+            <p>
               However, if you enter a word that doesn't follow the rules or
               isn't in the word list, you'll lose a point.
             </p>
@@ -245,6 +192,12 @@ const WordGame = () => {
                   : 'Press "Get Word" to start the timer'}{" "}
               </p>{" "}
             </div>{" "}
+            {showMessage && (
+              <MessageModal
+                message={messageContent}
+                onClose={() => setShowMessage(false)}
+              />
+            )}
             {!gameOver ? (
               <form onSubmit={handleSubmit}>
                 {" "}
@@ -301,12 +254,6 @@ const WordGame = () => {
                 </h3>
               ))}{" "}
             </div>{" "}
-            {showMessage && (
-              <MessageModal
-                message={messageContent}
-                onClose={() => setShowMessage(false)}
-              />
-            )}{" "}
           </div>
         }
       </div>
@@ -315,3 +262,13 @@ const WordGame = () => {
 };
 
 export default WordGame;
+
+//   const restartGame = () => {
+//     setScore(0);
+//     setTimer(null); // Reset the timer to null
+//     setCurrentWord("");
+//     setGameOver(false);
+//     setEnteredWords([]);
+//     setInputWord(""); // Reset the input field
+//     setShowStartingWord(false); // Hide the starting word when the game restarts
+//   };

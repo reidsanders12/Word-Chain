@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./TextDisplay.css";
 
-const TextDisplay = ({ enteredWords, validWords }) => {
+const TextDisplay = ({ enteredWords, validWords}) => {
   const [copied, setCopied] = useState(false); // Define the copied state and setCopied function
 
   const countEmojis = () => {
@@ -27,17 +27,18 @@ const TextDisplay = ({ enteredWords, validWords }) => {
         greenCount += wordGreenCount; // Special letters: 2 points per letter
         blueCount += wordBlueCount; // Normal letters: 1 point per letter
       } else {
-        // Deduct points for invalid words
-        redCount -= word.length; // Invalid words: Deduct points for each letter
+        // Increment red count by 1 for each invalid word
+        redCount += 1;
       }
     });
   
     return { greenCount, blueCount, redCount };
   };
   
+  
 
   const { greenCount, blueCount, redCount } = countEmojis();
-  const score = (greenCount *2) + blueCount + redCount;
+  const score = (greenCount*2) + blueCount - redCount;
 
   const copyToClipboard = () => {
     const currentDate = new Date().toLocaleDateString(); // Get current date
