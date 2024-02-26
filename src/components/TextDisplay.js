@@ -17,14 +17,14 @@ const TextDisplay = ({ enteredWords, validWords }) => {
         for (let i = 0; i < word.length; i++) {
           const letter = word[i];
           if (["w", "x", "v", "z"].includes(letter)) {
-            wordGreenCount+=2; // Increment the count of green letters
+            wordGreenCount++; // Increment the count of green letters
           } else {
             wordBlueCount++; // Increment the count of blue letters
           }
         }
   
         // Update counts based on the presence of green and blue letters in the word
-        greenCount += wordGreenCount; // Special letters: 2 points per letter
+        (greenCount * 2) += wordGreenCount; // Special letters: 2 points per letter
         blueCount += wordBlueCount; // Normal letters: 1 point per letter
       } else {
         // Deduct points for invalid words
