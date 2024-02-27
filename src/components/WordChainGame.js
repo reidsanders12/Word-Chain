@@ -124,7 +124,7 @@ const WordGame = () => {
           // Calculate score based on letters
           let wordScore = 0;
           for (let letter of lowerCaseInput) {
-            if (["w", "x", "v", "z"].includes(letter)) {
+            if (["w", "x", "v", "z", "q"].includes(letter)) {
               wordScore += 2; // Special letters: 2 points
             } else {
               wordScore += 1; // Normal letters: 1 point
@@ -160,7 +160,7 @@ const WordGame = () => {
             </p>
             <ul>
               <li>Normal letters: 1 point</li>
-              <li>Special letters (z, w, x, v): 2 points</li>
+              <li>Special letters (z, w, x, v, or q): 2 points</li>
             </ul>
             <p>
               However, if you enter a word that doesn't follow the rules or
